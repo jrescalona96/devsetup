@@ -1,0 +1,19 @@
+- name: My First Playbook
+  hosts: localhost
+  tasks: 
+    - name: clone neovim 
+      ansible.builtin.git:
+        repo: https://github.com/neovim/neovim.git
+        dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/personal/neovim"
+        single_branch: yes
+        version:  v0.10.1
+    # - name: Neovim Deps
+    #   become: true
+    #   community.general.homebrew:
+    #     name: "{{ item }}"
+    #     state: present
+    #   which_items:
+    #     - cmake
+    #     - gettext
+    #     - lua@5.1
+    #     - liblua@5.1-0-dev
