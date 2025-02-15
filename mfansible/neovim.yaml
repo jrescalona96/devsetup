@@ -7,13 +7,13 @@
         dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/personal/neovim"
         single_branch: yes
         version:  v0.10.1
-    # - name: Neovim Deps
-    #   become: true
-    #   community.general.homebrew:
-    #     name: "{{ item }}"
-    #     state: present
-    #   which_items:
-    #     - cmake
-    #     - gettext
-    #     - lua@5.1
-    #     - liblua@5.1-0-dev
+    - name: Neovim Deps
+      # become: true
+      community.general.homebrew:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - cmake
+        - gettext
+        - lua@5.4
+        - luajit
