@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+NVIM_PATH="$HOME/personal/neovim"
+CONFIG_PATH="$HOME/.config"
+
+if [ ! -d "$NVIM_PATH" ]; then
+	mkdir -p $NVIM_PATH
+fi
+
+git clone -b v0.10.3 https://github.com/neovim/neovim.git $NVIM_PATH
+
+echo "Installing Neovim Dependencies..."
+brew install ninja cmake gettext curl ripgrep
+
+cd $NVIM_PATH
+
+make CMAKE_BUILD_TYPE=Release DEPS_CMAKE_FLAGS="-DCMAKE_CXX_COMPILER=$(xcrun -find c++)" 
+sudo make install
+
+# TODO: install kickstart nvim
+
+if [ ! -d "$CONFIG_PATH" ]; then
+	mkdir -p $CONFIG_PATH
+fi
