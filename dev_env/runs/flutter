@@ -1,5 +1,36 @@
+#!/usr/bin/env bash
+
 echo "Installing flutter"
 
+INSTALL_PATH="$HOME/developer"
+ZIP_FILE_NAME="flutter.zip"
 
-curl -o /path/to/your/output/directory/flutter_macos_arm64_3.29.0-stable.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.29.0-stable.zip
+if [ -d "$directory" ]; then
+	echo "All set!"
+else
+	echo "path does not exist."
+	mkdir $INSTALL_PATH
+fi
 
+curl -o $HOME/developer/flutter.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.29.0-stable.zip
+
+cd $INSTALL_PATH
+unzip $INSTALL_PATH/$ZIP_FILE_NAME -d ~/development/
+echo "export PATH=$HOME/development/flutter/bin:$PATH" $HOME/.zshrc
+
+if command -v flutter &> /dev/null; then
+	flutter --version
+	rm -rf $INSTALL_PATH/flutter.zip
+else
+	echo "Failed to install flutter..."
+	exit 1
+fi
+
+echo "Flutter install complete.."
+
+
+echo "Configuring Xcode Command-line tools..."
+sudo sh -c 'xcode-select -s /Applications/Xcode.app/Contents/Developer && xcodebuild -runFirstLaunch'
+
+echo "Configuring Xcode License..."
+sudo xcodebuild -license
