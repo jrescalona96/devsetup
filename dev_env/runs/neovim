@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 NVIM_PATH="$HOME/personal/neovim"
-CONFIG_PATH="$HOME/.config"
 
 if [ ! -d "$NVIM_PATH" ]; then
 	mkdir -p $NVIM_PATH
@@ -17,8 +16,5 @@ cd $NVIM_PATH
 make CMAKE_BUILD_TYPE=Release DEPS_CMAKE_FLAGS="-DCMAKE_CXX_COMPILER=$(xcrun -find c++)" 
 sudo make install
 
-# TODO: install kickstart nvim
-
-if [ ! -d "$CONFIG_PATH" ]; then
-	mkdir -p $CONFIG_PATH
-fi
+echo "Cloning your nvim configuration.... foo.."
+git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim

@@ -1,0 +1,5 @@
+echo "Installing flutter"
+
+
+curl -o /path/to/your/output/directory/flutter_macos_arm64_3.29.0-stable.zip https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.29.0-stable.zip
+
