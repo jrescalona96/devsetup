@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+dry="0"
+
+# while there are arguments, loop through and shift
+# if the arg is "--dry"
+while [[ $# > 0 ]]; do
+	if [[ $1 == "--dry" ]]; then
+		dry="1"
+		shift
+	fi	
+done
+
+log() {
+	if [[ $dry == "1" ]]; then
+		echo "[DRY_RUN]: $@"
+	else
+		echo  "$@"
+	fi
+}
+
+execute() {
+	log "execute $@"
+	if [[ $dry == "1" ]]; then
+		return
+	fi
+
+	"$@"
+}
+
+log "======================= dev-env =============================="
+
+copy_dir() {
+	from=$1
+	to=$2
+ 
+	log $from
+	log $to
+	pushd $from > /dev/null
+	dirs=$(find . maxdepth 1 -mindepth 1 -type d)
+	for dir in $dirs; do
+		log rm -rf $to/$dir
+		log cp -r $dir $to/$dir
+	done
+	popd > /dev/null
+}
+
+copy_dir .config $HOME

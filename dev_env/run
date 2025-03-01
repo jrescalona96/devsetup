@@ -18,7 +18,7 @@ done
 
 log() {
 	if [[ $dry == "1" ]]; then
-		echo "[DRY_RUN]]: $@"
+		echo "[DRY_RUN]: $@"
 	else
 		echo  "$@"
 	fi
