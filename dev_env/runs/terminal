@@ -9,7 +9,7 @@ brew install jandedobbeleer/oh-my-posh/oh-my-posh
 
 # add init to enviroment variable
 INIT_OMP='if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh)"
+  eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/myomp.json)"
 fi'
 
 PROFILE="$HOME/.zshrc"
@@ -21,4 +21,5 @@ fi
 
 # restart terminal
 exec zsh -l
-#--------------- INSTALL PROMPT 
+
+#--------------- INSTALL PROMPT
