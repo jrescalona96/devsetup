@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+#--------------- INSTALL TMUX
+brew install tmux
+#--------------- INSTALL TMUX
+
+#--------------- INSTALL PROMPT
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+
+# add init to enviroment variable
+INIT_OMP='if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh)"
+fi'
+
+PROFILE="$HOME/.zshrc"
+
+if ! grep -Fxq "$INIT_OMP" "$PROFILE"; then
+	echo "$INIT_OMP" >> "$PROFILE"
+	echo "Enviroment var added for OMP"
+fi
+
+# restart terminal
+exec zsh -l
+#--------------- INSTALL PROMPT 

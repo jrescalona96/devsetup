@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Define colors
+PURPLE='\033[0;35m'
+GREEN='\033[0;32m'
+GREY='\033[0;30m'
+NC='\033[0m' # No Color
+
+# Function to print colored text
+echo_p() {
+  echo -e "${PURPLE}$1${NC}"
+}
+
+echo_g() {
+  echo -e "${GREEN}$1${NC}"
+}
+
+echo_gg() {
+  echo -e "${GREY}$1${NC}"
+}
+
+echo_p "\nConfiguring global version control settings...\n"
+
+# Prompt for username
+echo_p "Enter your Github username:"
+read username
+
+# Prompt for email
+echo_p "Enter your Github email:"
+read email
+
+# Set git credentials
+echo_g "git config --global user.name $username"
+echo_g "git config --global user.email $email"
+
+git config --global user.name "$username"
+git config --global user.email "$email"
+
+echo_p "Your global git credentials has been set to the ff:"
+echo_p "Username: $username"
+echo_p "Email: $email"
+
+# Automatically create new remote branch 
+git config --global push.autoSetupRemote true 
+
+
+echo_gg "************"
+echo_gg "Config is Set as follows."
+git config --list --global
+echo_gg "************"
