@@ -4,12 +4,9 @@ dry="0"
 
 # while there are arguments, loop through and shift
 # if the arg is "--dry"
-while [[ $# > 0 ]]; do
-	if [[ $1 == "--dry" ]]; then
-		dry="1"
-		shift
-	fi	
-done
+if [[ $1 == "--dry" ]]; then
+	dry="1"
+fi	
 
 log() {
 	if [[ $dry == "1" ]]; then
@@ -34,15 +31,19 @@ copy_dir() {
 	from=$1
 	to=$2
  
-	log $from
-	log $to
-	pushd $from > /dev/null
-	dirs=$(find . maxdepth 1 -mindepth 1 -type d)
+	log "FROM: $from"
+	log "TO: $to"
+	pushd $from
+	dirs=$(find . -maxdepth 1 -mindepth 1 -type d)
 	for dir in $dirs; do
-		log rm -rf $to/$dir
-		log cp -r $dir $to/$dir
+		execute rm -rf $to/$dir
+		execute cp -r $dir $to/$dir
 	done
-	popd > /dev/null
+	popd
 }
 
-copy_dir .config $HOME
+copy_dir .config "$HOME/.config"
+
+ls -la $HOME/.config
+
+log "======================= dev-env =============================="

@@ -47,3 +47,6 @@ for script in $scripts; do
 
 	execute ./$script
 done
+
+# restart zsh
+exec zsh -l
