@@ -2,8 +2,8 @@
 
 dry="0"
 
-# while there are arguments, loop through and shift
-# if the arg is "--dry"
+script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+
 if [[ $1 == "--dry" ]]; then
 	dry="1"
 fi	
@@ -25,25 +25,29 @@ execute() {
 	"$@"
 }
 
-log "======================= dev-env =============================="
+log $script_dir
 
 copy_dir() {
 	from=$1
 	to=$2
  
-	log "FROM: $from"
-	log "TO: $to"
-	pushd $from
+	pushd $from > /dev/null
 	dirs=$(find . -maxdepth 1 -mindepth 1 -type d)
 	for dir in $dirs; do
 		execute rm -rf $to/$dir
 		execute cp -r $dir $to/$dir
 	done
-	popd
+	popd > /dev/null
 }
 
-copy_dir .config "$HOME/.config"
+copy_file() {
+	from=$1
+	to=$2
+	name=$(basename $from)
 
-ls -la $HOME/.config
+	execute rm $to/$name
+	execute cp $from $to/$name
+}
 
-log "======================= dev-env =============================="
+copy_dir .config $HOME/.config
+# copy_file .config $HOME/.config

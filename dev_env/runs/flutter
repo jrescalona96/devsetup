@@ -34,3 +34,6 @@ sudo sh -c 'xcode-select -s /Applications/Xcode.app/Contents/Developer && xcodeb
 
 echo "Configuring Xcode License..."
 sudo xcodebuild -license
+
+echo "Insalling cocoapods..."
+brew install cocoapods

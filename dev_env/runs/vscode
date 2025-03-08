@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo "Disabling long  AplePressAndHoldEnabled"
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+defaults delete -g ApplePressAndHoldEnabled  # If necessary, reset global defaul

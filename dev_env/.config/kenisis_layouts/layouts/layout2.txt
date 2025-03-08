@@ -1,0 +1,16 @@
+<base>
+[hk3]>[prnt]
+[esc]>[caps]
+[rctr]>[ent]
+[bspc]>[lctr]
+[del]>[esc]
+[ent]>[bspc]
+[pgdn]>[del]
+{hk1}>{s9}{x1}{-lctr}{eql}{+lctr}
+{hk2}>{s9}{x1}{-lctr}{hyph}{+lctr}
+<keypad>
+<function1>
+{hk2}>{s9}{x1}{-lshf}{-lctr}{hyph}{+lshf}{+lctr}
+{hk1}>{s9}{x1}{-lshf}{-lctr}{eql}{+lshf}{+lctr}
+<function2>
+<function3>
