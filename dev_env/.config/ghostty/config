@@ -1,0 +1,24 @@
+theme = catppuccin-frappe
+font-family = JetBrainsMono Nerd Font
+font-size = 12 
+# cursor-style = block
+# adjust-cell-height = 50%
+
+# mouse-hide-while-typing = true
+# mouse-scroll-multiplier = 1
+
+# window-padding-balance = true 
+# window-save-state = always
+# macos-titlebar-style = transparent
+# window-colorspace = "display-p3"
+background = 1C2021
+foreground = d5be98
+
+# keybindings
+keybind = cmd+s>r=reload_config
+keybind = cmd+s>x=close_surface
+
+keybind = cmd+s>n=new_window
+
+# other
+# ghostty +show-config --default --docs | nvimcopy-on-select = clipboard

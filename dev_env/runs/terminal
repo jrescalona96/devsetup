@@ -1,34 +1,43 @@
 #!/usr/bin/env bash
 
-#--------------- INSTALL GHOSTTY
-if ! brew ls --versions ghostty 2> /dev/null; then
-  brew install --cask ghostty
-else
-  echo "Ghostty already installed!"
-fi
+FORMULA=("tmux" "jandedobbeleer/oh-my-posh/oh-my-posh")
+CASK=("ghostty") 
 
-#--------------- INSTALL TMUX
-if ! brew ls --versions tmux 2> /dev/null; then
-  brew install tmux
-else
-  echo "Ghostty already installed!"
-fi
+for formulae in "${CASK[@]}"
+do 
+  if ! brew ls --cask $formulae > /dev/null; then
+    brew install --cask $formulae 
+  else
+    echo "✅ $formulae already installed!"
+  fi
+done
 
-#--------------- INSTALL PROMPT
-if ! brew ls --versions jandedobbeleer/oh-my-posh/oh-my-posh 2> /dev/null; then
-  brew install jandedobbeleer/oh-my-posh/oh-my-posh
-else
-  echo "oh-my-posh already installed!"
-fi
+for formulae in "${FORMULA[@]}"
+do
+  if ! brew ls --versions $formulae > /dev/null; then
+    brew install $formulae 
+  else
+    echo "✅ $formulae already installed!"
+  fi
+done
 
 # add init to enviroment variable
-INIT_OMP='if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/myomp.toml)"
-fi'
+if brew ls --versions jandedobbeleer/oh-my-posh/oh-my-posh > /dev/null; then
+  INIT_OMP='if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+    eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/myomp.toml)"
+  fi'
 
-PROFILE="$HOME/.zshrc"
+  PROFILE="$HOME/.zshrc"
 
-if ! grep -Fxq "$INIT_OMP" "$PROFILE"; then
-	echo "$INIT_OMP" >> "$PROFILE"
-	echo "Enviroment var added for OMP"
+  if ! grep -Fxq "$INIT_OMP" "$PROFILE"; then
+    echo "$INIT_OMP" >> "$PROFILE"
+    # check configuration was applied
+    if ! grep -Fxq "$INIT_OMP" "$PROFILE"; then
+	  echo "> ✅ jandedobbeleer/oh-my-posh/oh-my-posh configured!"
+    else
+	    echo "> ⛔️ failed to configure jandedobbeleer/oh-my-posh/oh-my-posh!"
+    fi
+  else
+	  echo "> ✅ jandedobbeleer/oh-my-posh/oh-my-posh already configured!"
+  fi
 fi

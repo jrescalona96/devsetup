@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-brew install --cask nikitabobko/tap/aerospace
+if ! brew ls --cask nikitabobko/tap/aerospace > /dev/null; then
+	echo "⭕️ Installing aerospace"
+	brew install --cask nikitabobko/tap/aerospace
+else
+	echo "✅ Aerospace already installed"
+fi
