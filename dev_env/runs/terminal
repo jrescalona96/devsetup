@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FORMULA=("tmux" "jandedobbeleer/oh-my-posh/oh-my-posh")
+FORMULA=("tmux" "jandedobbeleer/oh-my-posh/oh-my-posh" "fzf")
 CASK=("ghostty") 
 
 for formulae in "${CASK[@]}"
@@ -21,6 +21,7 @@ do
   fi
 done
 
+echo "Running configurations..."
 # add init to enviroment variable
 if brew ls --versions jandedobbeleer/oh-my-posh/oh-my-posh > /dev/null; then
   INIT_OMP='if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
